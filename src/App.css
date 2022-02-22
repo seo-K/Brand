@@ -19,7 +19,7 @@
 	src: url(./assets/fonts/ELEPHNT.TTF) format('truetype');
 } 
 
-* { font-family: 'assets'; color: #222;}
+* { font-family: 'Bodo'; color: #222;}
 
 /*보편적 스타일링 reset.css*/
 html, body,

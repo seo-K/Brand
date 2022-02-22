@@ -1,13 +1,23 @@
 //react
 import { useEffect, useState, useRef } from "react";
 import { Link,useNavigate, useLocation  } from "react-router-dom";
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 
 //css
 import styled, { keyframes } from 'styled-components';
-import 'swiper/css';
+import "swiper/css";
+import "swiper/css/free-mode";
+import "swiper/css/pagination";
 
 // component
+
+// img
+import Slide01 from "../../../assets/img/slider_01.jfif"
+import Slide02 from "../../../assets/img/slider_02.jpg"
+import Slide03 from "../../../assets/img/slider_03.jpg"
+
+// swiper
+import { FreeMode, Pagination } from "swiper";
 
 
 // history 사용을 원할 경우
@@ -34,31 +44,78 @@ export default function MainSlider() {
         fontSize: '2rem'
     }
 
+    const SliderData = [
+        {
+            num: "001",
+            title: [<>Maiid<br/>AiFuttaim</>],
+            img: Slide01,
+            desc: "Orolia",
+            subDesc1: "Nullam fringilla sagittis elementum. In quis eros pulvinar, ",
+            subDesc2: "Suspendisse pretium molestie nisl a dignissim.",
+            subDesc3: "Maecenas porttitor tristique maximus. Sed non faucibus neque, sit amet eleifend nunc. In hac habitasse platea dictumst.",
+        },
+        {
+            num: "002",
+            title: [<>Maiid<br/>AiFuttaim</>],
+            img: Slide02,
+            desc: "Orolia",
+            subDesc1: "Nullam fringilla sagittis elementum. In quis eros pulvinar, ",
+            subDesc2: "Suspendisse pretium molestie nisl a dignissim.",
+            subDesc3: "Maecenas porttitor tristique maximus. Sed non faucibus neque, sit amet eleifend nunc. In hac habitasse platea dictumst.",
+        },
+        {
+            num: "001",
+            title: [<>Maiid<br/>AiFuttaim</>],
+            img: Slide03,
+            desc: "Orolia",
+            subDesc1: "Nullam fringilla sagittis elementum. In quis eros pulvinar, ",
+            subDesc2: "Suspendisse pretium molestie nisl a dignissim.",
+            subDesc3: "Maecenas porttitor tristique maximus. Sed non faucibus neque, sit amet eleifend nunc. In hac habitasse platea dictumst.",
+        },
+    ]
+
     return (
         <Wrap>
-            {/* <Swiper
-                spaceBetween={50}
-                // slidesPerView={3}
-                navigation
-                pagination={{ clickable: true }}
-                scrollbar={{ draggable: true }}
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
-            >
-            <SwiperSlide>Slide 1</SwiperSlide>
-            <SwiperSlide>Slide 2</SwiperSlide>
-            <SwiperSlide>Slide 3</SwiperSlide>
-            <SwiperSlide>Slide 4</SwiperSlide>
-            </Swiper> */}
 
             <FirstSection>
                 <Date>Update - 2022</Date>
                 <Title>Brands</Title>
                 <Desc>Quisque sit amet ultricies lacus, eget accumsan urna. Integer et efficitur nibh. Praesent quam ex, semper non eros ut, viverra lacinia sem. Maecenas quis interdum mauris. Aenean quis iaculis ex. Donec scelerisque nunc cursus mi vestibulum laoreet. In hac habitasse platea dictumst. Morbi eu lobortis nisi.</Desc>
             </FirstSection>
+
+            <ThirdSection>
+                <ThirdDesc>Quisque sit amet ultricies lacus, eget accumsan urna. Integer et efficitur nibh. Praesent quam ex, semper non eros ut, viverra lacinia sem. Maecenas quis interdum mauris. Aenean quis iaculis ex. Donec scelerisque nunc cursus mi vestibulum laoreet. In hac habitasse platea dictumst. Morbi eu lobortis nisi.</ThirdDesc>
+                <Swiper
+                    slidesPerView={2.1}
+                    spaceBetween={30}
+                    freeMode={true}
+                    modules={[FreeMode]}
+                    className="mainSwiper"
+                >
+                    {
+                        SliderData.map(( item, index ) => {
+                            return(
+                                <SwiperSlide key={"Swiper" + index} data-swiper-parallax="-130%">
+                                    <SlideNum>{item.num}</SlideNum>
+                                    <SlideTitle>{item.title}</SlideTitle>
+                                    <SlideImgWrap>
+                                        <SlideImg src={item.img} alt="슬라이드 이미지"/>
+                                    </SlideImgWrap>
+                                    <SlideDesc><span>{item.desc}</span><span>&amp;</span><span>∞</span></SlideDesc>
+                                    <SlideHideWrap>
+                                        <HideText>{item.subDesc1}</HideText>
+                                        <HideText>{item.subDesc2}</HideText>
+                                        <HideText>{item.subDesc3}</HideText>
+                                    </SlideHideWrap>
+                                </SwiperSlide>
+                            )
+                        })
+                    }
+                </Swiper>
+            </ThirdSection>
         </Wrap>
     );
-  }
+}
 
 
 const Wrap = styled.div`
@@ -151,4 +208,141 @@ const Desc = styled.p`
 
     margin-left: auto;
     z-index: 1;
+`
+
+const ThirdSection = styled.section`
+    position: relative;
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    margin: 0 auto;
+
+    padding: 40px 0;
+
+    & .mainSwiper{
+        width: 100%;
+        height: 300px;
+
+        padding-left: 200px;
+        overflow: visible;
+    }
+
+    & .swiper-slide {
+        position: relative;
+
+        width: 200px;
+
+        cursor: pointer;
+
+        /* Center slide text vertically */
+        /* display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center; */
+    }
+
+    .swiper-slide-prev{
+        /* transform: rotate(5deg) scale(1.1); */
+    }
+`
+
+const ThirdDesc = styled(Desc)`
+    margin-bottom: auto;
+`
+
+const SlideNum = styled.span`
+    font-size: 11px;
+    margin-bottom: 10px;
+`
+
+const SlideTitle = styled.h3`
+    position: absolute;
+    top: -20px;
+    left:50px;
+    font-size: 60px;
+
+    z-index: 1;
+    /* -webkit-filter: invert(100%); */
+    /* filter: invert(100%); */
+
+    mix-blend-mode: difference;
+    /* mix-blend-mode : color-dodge, hue; */
+/* 
+    filter: invert(100%); */
+
+    /* background: linear-gradient(-90deg, #3498db 50%, #ffffff 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    white-space: nowrap; */
+
+`
+
+const SlideImgWrap = styled.div`
+    width: 100%;
+    height: 250px;
+
+    margin-bottom: 3px;
+`
+
+const SlideImg = styled.img`
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+`
+
+const SlideDesc = styled.p`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 10px;
+`
+
+const SlideHideWrap = styled.div`
+    width: 100%;
+    
+`
+const textup = keyframes `
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(10%);
+        opacity: 0;
+    }
+    100% {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+`
+  
+const HideText = styled.p`
+    font-size: 13px;
+    /* transform: translateY(-100%); */
+
+    transform-origin: left bottom;
+
+    &:nth-of-type(1){
+        animation: ${textup} 3s linear normal;
+    }
+    &:nth-of-type(2){
+        animation: ${textup} 3s linear normal 1s;
+    }
+    &:nth-of-type(3){
+        animation: ${textup} 3s linear normal 2s;
+    }
 `
