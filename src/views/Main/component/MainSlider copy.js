@@ -4,7 +4,10 @@ import { Link,useNavigate, useLocation  } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // fullpage
-import ReactFullpage from '@fullpage/react-fullpage';
+import $ from 'jquery';
+import 'fullpage.js/vendors/scrolloverflow';
+import 'fullpage.js';
+import 'fullpage.js/dist/jquery.fullpage.min.css';
 
 //css
 import styled, { keyframes } from 'styled-components';
@@ -18,7 +21,6 @@ import "swiper/css/pagination";
 import Slide01 from "../../../assets/img/slider_01.jfif"
 import Slide02 from "../../../assets/img/slider_02.jpg"
 import Slide03 from "../../../assets/img/slider_03.jpg"
-import ShoesPng from "../../../assets/img/shoes.png"
 
 // swiper
 import { FreeMode } from "swiper";
@@ -30,11 +32,31 @@ import { FreeMode } from "swiper";
 
 
 export default function MainSlider() {
+// function Home(){
+    // $((): void => {
+    //     $('#fullpage').fullpage({
+    //       scrollOverflow: true,
+    //     });
+    //   });
 
-   // NOTE: if using fullpage extensions/plugins put them here and pass it as props
-    // const pluginWrapper = () => {
-    //     require('./statics/fullpage.scrollHorizontally.min');
-    // };
+
+    useEffect(() => {
+        ('#fullpage').fullpage({ autoScrolling: true, scrollOverflow: true, navigation: true, navigationPosition: 'right', }); return () => { if (('html').hasClass('fp-enabled')) {
+        $.fn.fullpage.destroy('all');
+    }}
+    }, [])
+    
+    // const [swiper, setSwiper] = useState(null);
+
+    // const slideTo = (index) => {
+    //     if(swiper) 
+    //     swiper.slideTo(index)};
+
+        
+    const activeStyle = {
+        color: 'green',
+        fontSize: '2rem'
+    }
 
     const SliderData = [
         {
@@ -88,91 +110,57 @@ export default function MainSlider() {
     ]
 
     return (
-        <Wrap>
-            <ReactFullpage
-                // pluginWrapper = {pluginWrapper}
-                //fullpage options
-                licenseKey = {'YOUR_KEY_HERE'}
-                scrollingSpeed = {1000} /* Options here */
-                // scrollHorizontally = {true}  /* Because we are using the extension */
-                // scrollHorizontallyKey = {'YOUR KEY HERE'}
-                // v2compatible = true 
+        <Wrap id="fullpage">
 
-                render={({ state, fullpageApi }) => {
-                    return (
-                    <ReactFullpage.Wrapper>
-                        {/* Section 1 */}
-                        <FirstSection className="section">
-                            <InnerWrap>
-                                <Date>Update - 2022</Date>
-                                <Title>Brands</Title>
-                                <button onClick={() => fullpageApi.moveSectionDown()}>
-                                    Click me to move down
-                                </button>
-                                <Desc>Quisque sit amet ultricies lacus, eget accumsan urna. Integer et efficitur nibh. Praesent quam ex, semper non eros ut, viverra lacinia sem. Maecenas quis interdum mauris. Aenean quis iaculis ex. Donec scelerisque nunc cursus mi vestibulum laoreet. In hac habitasse platea dictumst. Morbi eu lobortis nisi.</Desc>
-                            </InnerWrap>
-                        </FirstSection>
+            <FirstSection className="section fp-scrollable">
+                <Date>Update - 2022</Date>
+                <Title>Brands</Title>
+                <Desc>Quisque sit amet ultricies lacus, eget accumsan urna. Integer et efficitur nibh. Praesent quam ex, semper non eros ut, viverra lacinia sem. Maecenas quis interdum mauris. Aenean quis iaculis ex. Donec scelerisque nunc cursus mi vestibulum laoreet. In hac habitasse platea dictumst. Morbi eu lobortis nisi.</Desc>
+            </FirstSection>
 
-                        {/* Section 2 */}
-                        <SecondSection className="section">
-                            <InnerWrap>
-                                <Desc>Quisque sit amet ultricies lacus, eget accumsan urna. Integer et efficitur nibh. Praesent quam ex, semper non eros ut, viverra lacinia sem. Maecenas quis interdum mauris. Aenean quis iaculis ex. Donec scelerisque nunc cursus mi vestibulum laoreet. In hac habitasse platea dictumst. Morbi eu lobortis nisi.</Desc>
-                                <SecTitle>001</SecTitle>
-                                <ShoesWrap>
-                                    <ShoesImg src={ShoesPng} alt="신발"/>
-                                </ShoesWrap>
-                            </InnerWrap>
-                        </SecondSection>
+            <ThirdSection className="section">
+                <ThirdDesc>Quisque sit amet ultricies lacus, eget accumsan urna. Integer et efficitur nibh. Praesent quam ex, semper non eros ut, viverra lacinia sem. Maecenas quis interdum mauris. Aenean quis iaculis ex. Donec scelerisque nunc cursus mi vestibulum laoreet. In hac habitasse platea dictumst. Morbi eu lobortis nisi.</ThirdDesc>
+                <Swiper
+                    slidesPerView={2.1}
+                    spaceBetween={30}
+                    freeMode={true}
+                    modules={[FreeMode]}
+                    onSlideChange={() => console.log('slide change')}
+                    onSwiper={(swiper) => console.log(swiper)}
 
-                        {/* Section 3 */}
-                        <ThirdSection className="section">
-                        <ThirdDesc>Quisque sit amet ultricies lacus, eget accumsan urna. Integer et efficitur nibh. Praesent quam ex, semper non eros ut, viverra lacinia sem. Maecenas quis interdum mauris. Aenean quis iaculis ex. Donec scelerisque nunc cursus mi vestibulum laoreet. In hac habitasse platea dictumst. Morbi eu lobortis nisi.</ThirdDesc>
-                        <Swiper
-                            slidesPerView={2.1}
-                            spaceBetween={30}
-                            freeMode={true}
-                            modules={[FreeMode]}
-                            onSlideChange={() => console.log('slide change')}
-                            onSwiper={(swiper) => console.log(swiper)}
-
-                            className="mainSwiper"
-                        >
-                        {
-                            SliderData.map(( item, index ) => {
-                                return(
-                                    <SwiperSlide
-                                        key={"Swiper" + index} 
-                                        // data-swiper-parallax="-130%"
-                                        >
-                                        <SlideNum>00{index + 1}</SlideNum>
-                                        <SlideTitle>{item.title}</SlideTitle>
-                                        <SlideImgWrap>
-                                            <SlideImg src={item.img} alt="슬라이드 이미지"/>
-                                        </SlideImgWrap>
-                                        <SlideDesc><span>{item.desc}</span><span>&amp;</span><span>∞</span></SlideDesc>
-                                        {/* {({ isActive }) => (
-                                            <div>C1111urrent slide is {isActive ? 'active' : 'not active'}</div>
-                                            )} */}
-                                        {/* <SlideHideWrap>
-                                            <HideText>{item.subDesc1}</HideText>
-                                            <HideText>{item.subDesc2}</HideText>
-                                            <HideText>{item.subDesc3}</HideText>
-                                        </SlideHideWrap> */}
-                                    </SwiperSlide>
-                                )
-                            })
-                        }
-                        <span slot="container-start">Container 시작</span>
-                        <span slot="container-end">Container 끝</span>
-                        <span slot="wrapper-start">Wrapper 시작</span>
-                        <span slot="wrapper-end">Wrapper 끝</span>
-                    </Swiper>
-                </ThirdSection>
-
-            </ReactFullpage.Wrapper>
-            );
-          }}
-        />
+                    className="mainSwiper"
+                >
+                    {
+                        SliderData.map(( item, index ) => {
+                            return(
+                                <SwiperSlide
+                                    key={"Swiper" + index} 
+                                    // data-swiper-parallax="-130%"
+                                    >
+                                    <SlideNum>00{index + 1}</SlideNum>
+                                    <SlideTitle>{item.title}</SlideTitle>
+                                    <SlideImgWrap>
+                                        <SlideImg src={item.img} alt="슬라이드 이미지"/>
+                                    </SlideImgWrap>
+                                    <SlideDesc><span>{item.desc}</span><span>&amp;</span><span>∞</span></SlideDesc>
+                                    {/* {({ isActive }) => (
+                                        <div>C1111urrent slide is {isActive ? 'active' : 'not active'}</div>
+                                        )} */}
+                                    {/* <SlideHideWrap>
+                                        <HideText>{item.subDesc1}</HideText>
+                                        <HideText>{item.subDesc2}</HideText>
+                                        <HideText>{item.subDesc3}</HideText>
+                                    </SlideHideWrap> */}
+                                </SwiperSlide>
+                            )
+                        })
+                    }
+                    <span slot="container-start">Container 시작</span>
+                    <span slot="container-end">Container 끝</span>
+                    <span slot="wrapper-start">Wrapper 시작</span>
+                    <span slot="wrapper-end">Wrapper 끝</span>
+                </Swiper>
+            </ThirdSection>
         </Wrap>
     );
 }
@@ -187,16 +175,13 @@ const FirstSection = styled.section`
     width: 100%;
     height: 100vh;
 
-    padding: 180px 0 60px;
-`
-
-const InnerWrap = styled.div`
     display: flex;
     flex-direction: column;
 
     width: 800px;
     margin: 0 auto;
 
+    padding: 180px 0 60px;
 `
 
 const Date = styled.p`
@@ -271,32 +256,6 @@ const Desc = styled.p`
 
     margin-left: auto;
     z-index: 1;
-`
-
-const SecondSection = styled(FirstSection)`
-`
-
-const SecTitle = styled.p`
-    position: absolute;
-    top:50%;
-    left: -20%;
-
-    font-size: 500px;
-    color: #f4c705;
-
-    transform: translateY(-50%);
-`
-
-const ShoesWrap = styled.div`
-    width: 400px;
-    height: auto;
-`
-
-const ShoesImg = styled.img`
-    width: 100%;
-    height: 100%;
-
-    filter:drop-shadow(-3px 0px 20px rgba(0, 0, 0, 0.4));
 `
 
 const ThirdSection = styled.section`
