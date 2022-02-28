@@ -106,9 +106,11 @@ export default function MainSlider() {
                             <InnerWrap>
                                 <Date>Update - 2022</Date>
                                 <Title>Brands</Title>
+
                                 <button onClick={() => fullpageApi.moveSectionDown()}>
                                     Click me to move down
                                 </button>
+
                                 <Desc>Quisque sit amet ultricies lacus, eget accumsan urna. Integer et efficitur nibh. Praesent quam ex, semper non eros ut, viverra lacinia sem. Maecenas quis interdum mauris. Aenean quis iaculis ex. Donec scelerisque nunc cursus mi vestibulum laoreet. In hac habitasse platea dictumst. Morbi eu lobortis nisi.</Desc>
                             </InnerWrap>
                         </FirstSection>
@@ -150,9 +152,12 @@ export default function MainSlider() {
                                             <SlideImg src={item.img} alt="슬라이드 이미지"/>
                                         </SlideImgWrap>
                                         <SlideDesc><span>{item.desc}</span><span>&amp;</span><span>∞</span></SlideDesc>
-                                        {/* {({ isActive }) => (
-                                            <div>C1111urrent slide is {isActive ? 'active' : 'not active'}</div>
-                                            )} */}
+                                        {({ isActive }) => (
+                                        <div>
+                                            Current slide is{" "}
+                                            {isActive ? <p>{item.desc}</p> : <p>not active</p>}
+                                        </div>
+                                        )}
                                         {/* <SlideHideWrap>
                                             <HideText>{item.subDesc1}</HideText>
                                             <HideText>{item.subDesc2}</HideText>
