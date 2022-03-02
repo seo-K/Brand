@@ -15,6 +15,7 @@ import "swiper/css/pagination";
 // component
 
 // img
+import BgJpb from "../../../assets/img/bg.jpg"
 import Slide01 from "../../../assets/img/slider_01.jfif"
 import Slide02 from "../../../assets/img/slider_02.jpg"
 import Slide03 from "../../../assets/img/slider_03.jpg"
@@ -100,12 +101,12 @@ export default function MainSlider() {
 
                 render={({ state, fullpageApi }) => {
                     return (
-                    <ReactFullpage.Wrapper>
+                        <ReactFullpage.Wrapper>
                         {/* Section 1 */}
                         <FirstSection className="section">
                             <InnerWrap>
                                 <Date>Update - 2022</Date>
-                                <Title>Brands</Title>
+                                <Title>EXPLORE<br/>THE SPACE</Title>
 
                                 <button onClick={() => fullpageApi.moveSectionDown()}>
                                     Click me to move down
@@ -113,6 +114,9 @@ export default function MainSlider() {
 
                                 <Desc>Quisque sit amet ultricies lacus, eget accumsan urna. Integer et efficitur nibh. Praesent quam ex, semper non eros ut, viverra lacinia sem. Maecenas quis interdum mauris. Aenean quis iaculis ex. Donec scelerisque nunc cursus mi vestibulum laoreet. In hac habitasse platea dictumst. Morbi eu lobortis nisi.</Desc>
                             </InnerWrap>
+                            <BgCircle1>11</BgCircle1>
+                            <BgCircle2>aa</BgCircle2>
+                            <BgCircle3>df</BgCircle3>
                         </FirstSection>
 
                         {/* Section 2 */}
@@ -182,33 +186,7 @@ export default function MainSlider() {
     );
 }
 
-
-const Wrap = styled.div`
-    position: relative;
-    width: 100%;
-`
-const FirstSection = styled.section`
-    position: relative;
-    width: 100%;
-    height: 100vh;
-
-    padding: 180px 0 60px;
-`
-
-const InnerWrap = styled.div`
-    display: flex;
-    flex-direction: column;
-
-    width: 800px;
-    margin: 0 auto;
-
-`
-
-const Date = styled.p`
-    font-size: 11px;
-
-    margin-left: auto;
-`
+// 젤리 애니메이션
 const jello = keyframes `
     11.1% {
       transform: translate(-50%, -50%)
@@ -238,15 +216,124 @@ const jello = keyframes `
       transform: translate(-50%, -50%)
     }
 `
+
+const jello_bg = keyframes `
+    11.1% {
+      transform: translate(-50%, -50%) rotate(-10deg)
+    }
+    22.2% {
+      transform: skewX(-12.5deg) skewY(-12.5deg) translate(-50%, -50%) rotate(-10deg) scale(1.1)
+    }
+    33.3% {
+      transform: skewX(6.25deg) skewY(6.25deg) translate(-50%, -50%) rotate(-10deg) scale(1.1)
+    }
+    44.4% {
+      transform: skewX(-3.125deg) skewY(-3.125deg) translate(-50%, -50%) rotate(-10deg) scale(1.3)
+    }
+    55.5% {
+      transform: skewX(1.5625deg) skewY(1.5625deg) translate(-50%, -50%) rotate(-10deg) scale(1.2)
+    }
+    66.6% {
+      transform: skewX(-0.78125deg) skewY(-0.78125deg) translate(-50%, -50%) rotate(-10deg) scale(1.2)
+    }
+    77.7% {
+      transform: skewX(0.390625deg) skewY(-0.390625deg) translate(-50%, -50%) rotate(0deg) scale(1.1)
+    }
+    88.8% {
+      transform: skewX(-0.1953125deg) skewY(-0.1953125deg) translate(-50%, -50%) rotate(-5deg) scale(1.05)
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(-10deg) scale(1)
+    }
+`
+
+const Wrap = styled.div`
+    position: relative;
+    width: 100%;
+`
+const FirstSection = styled.section`
+    position: relative;
+    width: 100%;
+    height: 100vh;
+
+    padding: 180px 0 60px;
+    background: #ff;
+`
+
+const InnerWrap = styled.div`
+    display: flex;
+    flex-direction: column;
+
+    width: 800px;
+    margin: 0 auto;
+
+`
+
+const BgCircle1 = styled.div`
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: url(/static/media/bg.c44ed04c57064dd1b4d5.jpg) no-repeat center center fixed;
+    background-size: cover;
+    border-radius: 50%;
+
+    width: 200px;
+    height: 200px;
+
+    z-index: 5;
+
+`
+
+const BgCircle2 = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translate(-50%, -50%) rotate(-10deg);
+    background: url(/static/media/bg.c44ed04c57064dd1b4d5.jpg) no-repeat center center fixed;
+    background-size: cover;
+    border-radius: 50%;
+
+    width: 150px;
+    height: 200px;
+
+    z-index: 5;
+
+    animation: ${jello_bg} 6s infinite;
+    transform-origin: left top;
+`
+
+const BgCircle3 = styled.div`
+    position: absolute;
+    top:10%;
+    left: 10%;
+    transform: translate(-50%, -50%);
+    background: url(/static/media/bg.c44ed04c57064dd1b4d5.jpg) no-repeat center center fixed;
+    background-size: cover;
+    border-radius: 50%;
+
+    width: 200px;
+    height: 200px;
+
+    z-index: 5;
+
+`
+
+const Date = styled.p`
+    font-size: 11px;
+
+    margin-left: auto;
+`
   
 const Title = styled.h2`
     position: relative;
 
-    font-family: 'Bodo';
+font-family: 'One';
     font-size: 180px;
 
     z-index: 1;
     margin-bottom: 70px;
+    color: #fff;
 
     &:after{
         position: absolute;
@@ -265,6 +352,7 @@ const Title = styled.h2`
         animation: ${jello} 3s infinite;
         transform-origin: left top;
     }
+
 `
 
 
