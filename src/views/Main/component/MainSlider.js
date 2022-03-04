@@ -15,11 +15,16 @@ import "swiper/css/pagination";
 // component
 
 // img
-import BgJpb from "../../../assets/img/bg.jpg"
+import BgJpg from "../../../assets/img/bg.jpg"
 import Slide01 from "../../../assets/img/slider_01.jfif"
 import Slide02 from "../../../assets/img/slider_02.jpg"
 import Slide03 from "../../../assets/img/slider_03.jpg"
 import ShoesPng from "../../../assets/img/shoes.png"
+
+import UfoPng from "../../../assets/img/ufo.png"
+import LookPng from "../../../assets/img/look.png"
+import PersonPng from "../../../assets/img/space_person.png"
+import PlantPng from "../../../assets/img/plant.png"
 
 // swiper
 import { FreeMode } from "swiper";
@@ -37,6 +42,7 @@ export default function MainSlider() {
     //     require('./statics/fullpage.scrollHorizontally.min');
     // };
 
+    // 슬라이더 컨텐츠
     const SliderData = [
         {
             title: [<>Maiid<br/>AiFuttaim</>],
@@ -88,6 +94,41 @@ export default function MainSlider() {
         },
     ]
 
+    // title 그림자 for 문
+    //initial text-shadow function
+    // @function textShadow($color){
+    //     //value variable: x-value, y-value, color value;
+    //     $val: 0px 0px $color;
+    //     //loop to create text-shadow variables moving 1px to the left and 1 down
+    //     @for $i from 1 through 50{
+    //     $val: #{$val}, -#{$i}px #{$i}px #{$color};
+    // }
+    //     //return value
+    //     @return $val;
+    // }
+
+    const rendering = () => {
+        let arr = [];
+        arr.length = 20
+        for (let i = 0; i < arr.length; i++)
+            arr[i] = i
+        return arr + "px" + arr + "px" + 0 + "#000"
+    }
+
+    // 마우스 스크래치 이벤트
+    function mouseEvent () {
+        document.addEventListener('mousemove', function(e){
+            const body = document.querySelector('.first_section');
+            const bubbles = document.createElement('span');
+            bubbles.style.left = -75 + e.offsetX + 'px';
+            bubbles.style.top = -75 + e.offsetY + 'px';
+
+            body.appendChild(bubbles);
+        })
+    }
+    // mouseEvent ();
+        
+
     return (
         <Wrap>
             <ReactFullpage
@@ -99,39 +140,43 @@ export default function MainSlider() {
                 // scrollHorizontallyKey = {'YOUR KEY HERE'}
                 // v2compatible = true 
 
-                render={({ state, fullpageApi }) => {
-                    return (
-                        <ReactFullpage.Wrapper>
-                        {/* Section 1 */}
-                        <FirstSection className="section">
-                            <InnerWrap>
-                                <Date>Update - 2022</Date>
-                                <Title>EXPLORE<br/>THE SPACE</Title>
+            render={({ state, fullpageApi }) => {
+            return (
+                <ReactFullpage.Wrapper>
+                    {/* Section 1 */}
+                    <FirstSection className="section first_section">
+                        <InnerWrap>
+                            <Title>EXPLORE<br/>THE SPACE</Title>
+                            <BackTitle>EXPLORE<br/>THE SPACE</BackTitle>
+                            <button onClick={() => fullpageApi.moveSectionDown()}>
+                                Click me to move down
+                            </button>
+                        </InnerWrap>
+                        <Desc>SPACE INVADERS</Desc>
+                        <BgCircle1></BgCircle1>
+                        <BgCircle2></BgCircle2>
+                        <BgCircle3></BgCircle3>
 
-                                <button onClick={() => fullpageApi.moveSectionDown()}>
-                                    Click me to move down
-                                </button>
+                        {/* 컨텐츠 */}
+                        <UfoImg src={UfoPng} alt="ufo"/>
+                        <LookImg src={LookPng} alt="look"/>
+                        <PersonImg src={PersonPng} alt="person"/>
+                        <PlantImg src={PlantPng} alt="plant"/>
+                    </FirstSection>
 
-                                <Desc>Quisque sit amet ultricies lacus, eget accumsan urna. Integer et efficitur nibh. Praesent quam ex, semper non eros ut, viverra lacinia sem. Maecenas quis interdum mauris. Aenean quis iaculis ex. Donec scelerisque nunc cursus mi vestibulum laoreet. In hac habitasse platea dictumst. Morbi eu lobortis nisi.</Desc>
-                            </InnerWrap>
-                            <BgCircle1>11</BgCircle1>
-                            <BgCircle2>aa</BgCircle2>
-                            <BgCircle3>df</BgCircle3>
-                        </FirstSection>
+                    {/* Section 2 */}
+                    <SecondSection className="section">
+                        <InnerWrap>
+                            <Desc>Quisque sit amet ultricies lacus, eget accumsan urna. Integer et efficitur nibh. Praesent quam ex, semper non eros ut, viverra lacinia sem. Maecenas quis interdum mauris. Aenean quis iaculis ex. Donec scelerisque nunc cursus mi vestibulum laoreet. In hac habitasse platea dictumst. Morbi eu lobortis nisi.</Desc>
+                            <SecTitle>001</SecTitle>
+                            <ShoesWrap>
+                                <ShoesImg src={ShoesPng} alt="신발"/>
+                            </ShoesWrap>
+                        </InnerWrap>
+                    </SecondSection>
 
-                        {/* Section 2 */}
-                        <SecondSection className="section">
-                            <InnerWrap>
-                                <Desc>Quisque sit amet ultricies lacus, eget accumsan urna. Integer et efficitur nibh. Praesent quam ex, semper non eros ut, viverra lacinia sem. Maecenas quis interdum mauris. Aenean quis iaculis ex. Donec scelerisque nunc cursus mi vestibulum laoreet. In hac habitasse platea dictumst. Morbi eu lobortis nisi.</Desc>
-                                <SecTitle>001</SecTitle>
-                                <ShoesWrap>
-                                    <ShoesImg src={ShoesPng} alt="신발"/>
-                                </ShoesWrap>
-                            </InnerWrap>
-                        </SecondSection>
-
-                        {/* Section 3 */}
-                        <ThirdSection className="section">
+                    {/* Section 3 */}
+                    <ThirdSection className="section">
                         <ThirdDesc>Quisque sit amet ultricies lacus, eget accumsan urna. Integer et efficitur nibh. Praesent quam ex, semper non eros ut, viverra lacinia sem. Maecenas quis interdum mauris. Aenean quis iaculis ex. Donec scelerisque nunc cursus mi vestibulum laoreet. In hac habitasse platea dictumst. Morbi eu lobortis nisi.</ThirdDesc>
                         <Swiper
                             slidesPerView={2.1}
@@ -176,9 +221,9 @@ export default function MainSlider() {
                         <span slot="wrapper-start">Wrapper 시작</span>
                         <span slot="wrapper-end">Wrapper 끝</span>
                     </Swiper>
-                </ThirdSection>
+                    </ThirdSection>
 
-            </ReactFullpage.Wrapper>
+                </ReactFullpage.Wrapper>
             );
           }}
         />
@@ -217,33 +262,55 @@ const jello = keyframes `
     }
 `
 
-const jello_bg = keyframes `
-    11.1% {
-      transform: translate(-50%, -50%) rotate(-10deg)
+const TitleMove = keyframes `
+    0% {
+        transform:translate(0, 0);
     }
-    22.2% {
-      transform: skewX(-12.5deg) skewY(-12.5deg) translate(-50%, -50%) rotate(-10deg) scale(1.1)
+    25% {
+        transform:translate(5px, 0);
     }
-    33.3% {
-      transform: skewX(6.25deg) skewY(6.25deg) translate(-50%, -50%) rotate(-10deg) scale(1.1)
+    50% {
+        transform:translate(0, 5px);
     }
-    44.4% {
-      transform: skewX(-3.125deg) skewY(-3.125deg) translate(-50%, -50%) rotate(-10deg) scale(1.3)
-    }
-    55.5% {
-      transform: skewX(1.5625deg) skewY(1.5625deg) translate(-50%, -50%) rotate(-10deg) scale(1.2)
-    }
-    66.6% {
-      transform: skewX(-0.78125deg) skewY(-0.78125deg) translate(-50%, -50%) rotate(-10deg) scale(1.2)
-    }
-    77.7% {
-      transform: skewX(0.390625deg) skewY(-0.390625deg) translate(-50%, -50%) rotate(0deg) scale(1.1)
-    }
-    88.8% {
-      transform: skewX(-0.1953125deg) skewY(-0.1953125deg) translate(-50%, -50%) rotate(-5deg) scale(1.05)
+    75% {
+        transform:translate(-5px, 0);
     }
     100% {
-      transform: translate(-50%, -50%) rotate(-10deg) scale(1)
+        transform:translate(-5px, -5px);
+    }
+    
+`
+
+const plantMove = keyframes `
+    0% {
+        transform:translate(0, 0) rotate(25deg);
+    }
+    60% {
+        transform:translate(800px, -400px) rotate(-40deg);
+    }
+    80% {
+        transform:translate(810px, -390px) rotate(-45deg) scale(1.05);
+    }
+    100% {
+        transform:translate(800px, -400px) rotate(-40deg) scale(1.02);
+    }
+`
+
+const PersonMove = keyframes `
+    form {
+        transform:translate(0, 0) rotate(-30deg);
+    }
+    to {
+        transform:translate(10px, -20px) rotate(-30deg);
+    }
+`
+
+const UfoMove = keyframes `
+    form {
+        transform:translate(0, 10px);
+    }
+    to {
+        transform:translate(0, -10px);
     }
 `
 
@@ -256,11 +323,27 @@ const FirstSection = styled.section`
     width: 100%;
     height: 100vh;
 
-    padding: 180px 0 60px;
-    background: #ff;
+    /* padding: 180px 0 60px; */
+    background: #fff;
+    background-blend-mode: difference;
+
+    overflow: hidden;
+
+    & span{
+        display: block;
+        position: absolute;
+        width: 150px;
+        height: 150px;
+
+        background: url(${BgJpg}) no-repeat center center fixed;
+        /* background: #000; */
+        background-size: cover;
+        border-radius: 50%;
+    }
 `
 
 const InnerWrap = styled.div`
+    position: relative;
     display: flex;
     flex-direction: column;
 
@@ -271,10 +354,9 @@ const InnerWrap = styled.div`
 
 const BgCircle1 = styled.div`
     position: absolute;
-    top:50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: url(/static/media/bg.c44ed04c57064dd1b4d5.jpg) no-repeat center center fixed;
+    top:10%;
+    right: 10%;
+    background: url(${BgJpg}) no-repeat center center fixed;
     background-size: cover;
     border-radius: 50%;
 
@@ -290,7 +372,7 @@ const BgCircle2 = styled.div`
     top: 50%;
     left: 10%;
     transform: translate(-50%, -50%) rotate(-10deg);
-    background: url(/static/media/bg.c44ed04c57064dd1b4d5.jpg) no-repeat center center fixed;
+    background: url(${BgJpg}) no-repeat center center fixed;
     background-size: cover;
     border-radius: 50%;
 
@@ -298,8 +380,7 @@ const BgCircle2 = styled.div`
     height: 200px;
 
     z-index: 5;
-
-    animation: ${jello_bg} 6s infinite;
+    
     transform-origin: left top;
 `
 
@@ -308,7 +389,7 @@ const BgCircle3 = styled.div`
     top:10%;
     left: 10%;
     transform: translate(-50%, -50%);
-    background: url(/static/media/bg.c44ed04c57064dd1b4d5.jpg) no-repeat center center fixed;
+    background: url(${BgJpg}) no-repeat center center fixed;
     background-size: cover;
     border-radius: 50%;
 
@@ -316,6 +397,50 @@ const BgCircle3 = styled.div`
     height: 200px;
 
     z-index: 5;
+
+`
+
+const UfoImg = styled.img`
+    position: absolute;
+    bottom: -10%;
+    left: 30%;
+    width: 400px;
+    height: 600px;
+
+    animation: ${UfoMove} 3s linear infinite alternate ;
+`
+
+const LookImg = styled.img`
+    position: absolute;
+    bottom: 0;
+    left: 60%;
+    width: 300px;
+    height: 300px;
+`
+
+const PersonImg = styled.img`
+    position: absolute;
+    bottom:0;
+    right: 0;
+    width: 570px;
+    height: 700px;
+
+    transform: rotate(-30deg);
+
+    animation: ${PersonMove} 3s linear infinite alternate ;
+`
+
+const PlantImg = styled.img`
+    position: absolute;
+    top:60%;
+    left: 10%;
+    width: 300px;
+    height: 200px;
+    
+    transform: rotate(25deg);
+
+    transition: all .4s;
+    animation: ${plantMove} 2s ease forwards;
 
 `
 
@@ -328,33 +453,26 @@ const Date = styled.p`
 const Title = styled.h2`
     position: relative;
 
-font-family: 'One';
-    font-size: 180px;
+    font-family: 'One';
+    font-size: 150px;
 
     z-index: 1;
     margin-bottom: 70px;
     color: #fff;
-
-    &:after{
-        position: absolute;
-        right: 0;
-        top: 50%;
-        content:'';
-
-        width: 180px;
-        height: 180px;
-        border-radius: 50%;
-        background: #f2c801;
-
-        transform: translate(-50%, -50%);
-        z-index:-1;
-
-        animation: ${jello} 3s infinite;
-        transform-origin: left top;
-    }
-
+    z-index:1;
 `
 
+const BackTitle = styled(Title)`
+    position: absolute;
+    top:0;
+    left: 10px;
+    color: #000;
+    z-index: 0;
+
+    font-weight: bold;
+
+    animation: ${TitleMove} 5s linear infinite alternate ;
+`
 
 const Desc = styled.p`
     position: relative;
