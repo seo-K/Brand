@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 import { Link, useNavigate, Outlet } from "react-router-dom";
 
-import Header from '../../component/Header';
+import Header from "../../components/common/Header";
 // function handleClick() {
 //   navigate("/home");
 // }
@@ -9,9 +9,9 @@ import Header from '../../component/Header';
 export default function users() {
     return (
         <>
-            <Header/>
+            <Header />
             마이페이지 기본 레이아웃
             <Outlet />
         </>
-    )
+    );
 }
