@@ -17,7 +17,7 @@ import * as S from "./style";
 import { MainImg } from "../../../utils/ImgLIst/img";
 
 // swiper
-import { FreeMode } from "swiper";
+import { FreeMode, Keyboard } from "swiper";
 
 // history 사용을 원할 경우
 // import { createBrowserHistory} from 'react-router-dom';
@@ -218,18 +218,27 @@ export default function MainSlider() {
                                     slidesPerView={2.1}
                                     spaceBetween={30}
                                     freeMode={true}
-                                    modules={[FreeMode]}
+                                    keyboard={{ enabled: true }}
+                                    modules={[FreeMode, Keyboard]}
+                                    mousewheel
+                                    // grabCursor: true
                                     onSlideChange={() => {
                                         setSlideActive(true);
                                         console.log("움직인다");
                                     }}
+                                    // onSlideChangeTransitionStart={() => {
+                                    //     setSlideActive(true);
+                                    //     console.log("움직인다");
+                                    // }}
                                     onSlideChangeTransitionEnd={() => {
                                         setSlideActive(false);
                                     }}
+                                    onActiveIndexChange={(e) => {
+                                        console.log(e.realIndex + "번째 활성화중");
+                                    }}
                                     onSwiper={(swiper) => console.log(swiper)}
-                                    // rotateActive={slideActive === true ? true : false}
-                                    // rotateActive={slideActive === true ? true : false}
-
+                                    // swiper ref
+                                    // https://codesandbox.io/s/reactidswiper-demo-forked-yn90x?file=/src/slider.js:2020-2025
                                     className="mainSwiper"
                                 >
                                     {SliderData.map((item, index) => {
@@ -239,6 +248,7 @@ export default function MainSlider() {
                                                 // data-swiper-parallax="-130%"
                                             >
                                                 <S.SlideNum>00{index + 1}</S.SlideNum>
+                                                <S.Circle></S.Circle>
                                                 <S.SlideTitle>{item.title}</S.SlideTitle>
                                                 <S.SlideImgWrap rotateEvent={slideActive === true ? true : false}>
                                                     <S.SlideImg src={item.img} alt="슬라이드 이미지" />
@@ -250,10 +260,10 @@ export default function MainSlider() {
                                                 </S.SlideDesc>
                                                 {({ isActive }) => <div>Current slide is {isActive ? <p>{item.desc}</p> : <p>not active</p>}</div>}
                                                 {/* <SlideHideWrap>
-                                            <HideText>{item.subDesc1}</HideText>
-                                            <HideText>{item.subDesc2}</HideText>
-                                            <HideText>{item.subDesc3}</HideText>
-                                        </SlideHideWrap> */}
+                                                    <HideText>{item.subDesc1}</HideText>
+                                                    <HideText>{item.subDesc2}</HideText>
+                                                    <HideText>{item.subDesc3}</HideText>
+                                                </SlideHideWrap> */}
                                             </SwiperSlide>
                                         );
                                     })}

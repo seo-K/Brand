@@ -354,13 +354,15 @@ export const SlideTitle = styled.h3`
     font-size: 60px;
     color: #000;
 
+    background: #fff;
+
     z-index: 1;
 
     transition: 0.5s ease;
     animation: ${TitleUpDown} 5s linear infinite alternate;
     mix-blend-mode: difference;
 
-    &:after {
+    /* &:after {
         position: absolute;
         top: 0;
         left: 0;
@@ -369,25 +371,40 @@ export const SlideTitle = styled.h3`
         content: "";
 
         border-radius: 50%;
-        background: red;
+        background: #fff;
 
         z-index: -1;
-    }
+    } */
+`;
 
-    /* -webkit-filter: invert(100%); */
-    /* filter: invert(100%); */
+export const Circle = styled.div`
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    margin: auto;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: #fff000;
+    z-index: 0;
+    /* animation: ani 3s alternate infinite; */
+`;
+/* -webkit-filter: invert(100%); */
+/* filter: invert(100%); */
 
-    /* mix-blend-mode: difference; */
+/* mix-blend-mode: difference; */
 
-    /* mix-blend-mode: color-dodge, hue; */
-    /* 
+/* mix-blend-mode: color-dodge, hue; */
+/* 
     filter: invert(100%); */
 
-    /* background: linear-gradient(-90deg, #3498db 50%, #ffffff 50%);
+/* background: linear-gradient(-90deg, #3498db 50%, #ffffff 50%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     white-space: nowrap; */
-`;
 
 export const SlideImgWrap = styled.div`
     width: 100%;
@@ -419,6 +436,8 @@ export const SlideImg = styled.img`
     width: 100%;
     height: 100%;
     object-fit: cover;
+
+    isolation: isolate;
 `;
 
 export const SlideDesc = styled.p`

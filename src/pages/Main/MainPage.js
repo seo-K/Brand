@@ -25,10 +25,10 @@ export default function MainPage() {
         // navigate.goBack();
         navigate(-1);
     };
-    const activeStyle = {
-        color: "green",
-        fontSize: "2rem",
-    };
+    // const activeStyle = {
+    //     color: "green",
+    //     fontSize: "2rem",
+    // };
 
     return (
         <MainContainer>
